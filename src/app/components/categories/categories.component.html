@@ -1,0 +1,66 @@
+<app-navbar></app-navbar>
+
+<div id="seccion-categorias" class="container d-flex justify-content-center my-3">
+  <div class="card shadow col-lg-8 m-3 p-3">
+    <div class="mx-3">
+      <h2>Categorías</h2>
+      <div class="input-group" [formGroup]="form">
+        <input class="form-control me-2" id="agregar-categoria" type="text" formControlName="name">
+        <button class="btn btn-success" (click)="saveCategory()">Agregar</button>
+      </div>
+    </div>
+    <div id="lista-categorias" class="m-3">
+      <table class="table table-borderless table-hover" id="operations-results">
+        <tbody>
+        <ng-container *ngFor="let category of categories; let i = index">
+          <tr>
+            <td>
+              <span class="bg-success text-light px-1">{{category.name}}</span>
+            </td>
+            <td class="text-end">
+
+
+              <!-- Button trigger modal -->
+              <button class="btn btn-link link-success mb-1" data-bs-toggle="modal"
+                      [attr.data-bs-target]="'#edit-category-modal-' + i">Editar
+              </button>
+
+              <!-- Modal Start -->
+              <div class="modal fade" [id]="'edit-category-modal-' + i" tabindex="-1"
+                   aria-labelledby="edit-operation-modalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="edit-operation-modalLabel">Editar categoría</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal"
+                              aria-label="Close"></button>
+                    </div>
+                    <form>
+                      <div class="modal-body" [formGroup]="form">
+                        <input type="text" class="form-control" formControlName="name" id="name">
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary"
+                                data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-success" data-bs-dismiss="modal"
+                                (click)="editCategory(category.id)">Guardar</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <!-- Modal End -->
+
+              <button class="btn btn-link link-success mb-1"
+                      (click)="deleteCategory(category.id)">Eliminar</button>
+
+            </td>
+          </tr>
+        </ng-container>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

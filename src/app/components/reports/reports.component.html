@@ -1,0 +1,115 @@
+<app-navbar></app-navbar>
+
+<section id="seccion-reportes" class="container d-flex justify-content-center my-3">
+  <div class="card shadow col-lg-8 px-3 pt-3">
+    <h2>Reportes</h2>
+        <div *ngIf="report !== null" class="container-fluid my-3">
+          <table class="table table-borderless table-hover" id="reportes-resumen">
+
+            <thead>
+            <tr>
+              <span class="fw-bold lead">
+                Categorías por ganancia
+              </span>
+            </tr>
+            </thead>
+            <tbody>
+            <ng-container *ngFor="let category of categoriesByProfit; let i = index">
+              <tr>
+                <td>
+                  <span class="bg-success text-light px-1">
+                    {{category.category.name}}
+                  </span>
+                </td>
+                <td>
+                  <span class="text-success fw-bold">
+                    ${{category.amount}}
+                  </span>
+                </td>
+              </tr>
+            </ng-container>
+            </tbody>
+
+            <thead>
+            <tr>
+              <span class="fw-bold lead">
+                Categorías por gasto
+              </span>
+            </tr>
+            </thead>
+            <tbody>
+            <ng-container *ngFor="let category of categoriesByExpense; let i = index">
+              <tr>
+                <td>
+                  <span class="bg-danger text-light px-1">
+                  {{category.category.name}}
+                  </span>
+                </td>
+                <td>
+                  <span class="text-danger fw-bold">
+                  ${{category.amount}}
+                  </span>
+                </td>
+              </tr>
+            </ng-container>
+            </tbody>
+
+            <thead>
+            <tr>
+              <span class="fw-bold lead">
+                Meses por ganancia
+              </span>
+            </tr>
+            </thead>
+            <tbody>
+            <ng-container *ngFor="let month of monthsByProfit; let i = index">
+              <tr>
+                <td>
+                  <span class="bg-success text-light px-1">
+                  {{month.month}}-{{month.year}}
+                  </span>
+                </td>
+                <td>
+                  <span class="text-success fw-bold">
+                  ${{month.total}}
+                  </span>
+                </td>
+              </tr>
+            </ng-container>
+            </tbody>
+
+            <thead>
+            <tr>
+              <span class="fw-bold lead">
+                Meses por gasto
+              </span>
+            </tr>
+            </thead>
+            <tbody>
+            <ng-container *ngFor="let month of monthsByExpense; let i = index">
+              <tr>
+                <td>
+                  <span class="bg-danger text-light px-1">
+                  {{month.month}}-{{month.year}}
+                  </span>
+                </td>
+                <td>
+                  <span class="text-danger fw-bold">
+                  ${{month.total}}
+                  </span>
+                </td>
+              </tr>
+            </ng-container>
+            </tbody>
+          </table>
+      </div>
+
+      <div *ngIf="report === null" class="text-center p-3" id="reportes-no-results">
+        <img class="img-fluid m-3" src="img/chart.svg" alt="">
+        <p class="h4 text-center">Operaciones insuficientes</p>
+        <p class="text-center">Prueba agregando más operaciones</p>
+      </div>
+  </div>
+</section>
+
+<app-footer></app-footer>

@@ -1,0 +1,193 @@
+<app-navbar></app-navbar>
+<!-- Balance page -->
+<div class="container my-3">
+  <div class="row">
+    <!-- Left col start -->
+    <div class="col-lg-4 col-sm-12">
+      <!-- Balance box start -->
+      <div class="card shadow m-3 p-3">
+        <h2 class="mb-3">Balance</h2>
+        <p class="row">
+          <span class="col text-success fw-bold lead">Ganancias</span>
+          <span class="col text-end text-success" id="balance-profits">{{balance.profits}}</span>
+        </p>
+        <p class="row">
+          <span class="col text-danger fw-bold lead">Gastos</span>
+          <span class="col text-end text-danger" id="balance-expenses">{{balance.expenses}}</span>
+        </p>
+        <p class="row">
+          <span class="col fw-bold lead">Total</span>
+          <span class="col text-end fw-bold" id="balance-total">{{balance.total}}</span>
+        </p>
+      </div>
+      <!-- Balance box end -->
+      <!-- Filters box start -->
+      <div class="card shadow m-3 p-3">
+        <div class="row">
+          <h3 class="col">Filtros</h3>
+        </div>
+        <div id="filters">
+          <label class="h6" for="type-filter">Tipo</label>
+          <select class="form-select" name="" id="type-filter" (change)="getOperations()">
+            <option value="">-- --</option>
+            <option value="PROFIT">Gasto</option>
+            <option value="EXPENSE">Ganancia</option>
+          </select>
+          <label class="h6" for="category-filter">Categoría</label>
+          <select class="form-select" name="" id="category-filter" (change)="getOperations()">
+            <option value="">-- --</option>
+            <ng-container *ngFor="let category of categories; let i = index">
+              <option value="{{category.id}}">{{category.name}}</option>
+            </ng-container>
+          </select>
+          <label class="h6" for="date-filter">Desde</label>
+          <input class="form-control" type="date" id="date-filter" (change)="getOperations()">
+        </div>
+      </div>
+      <!-- Filters box end -->
+    </div>
+    <!-- Left col end -->
+    <!-- Right col start -->
+    <div class="col-lg-8 col-sm-12">
+      <div class="col">
+        <!-- Operations box start -->
+        <div class="card shadow m-3 p-3">
+          <div class="row">
+            <div class="col">
+              <h3>Operaciones</h3>
+            </div>
+            <div class="col-auto">
+
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-success ml-auto" data-bs-toggle="modal"
+                data-bs-target="#new-operation-modal">
+                <i class="fas fa-plus"></i>
+              </button>
+
+              <!-- Modal Start -->
+              <div class="modal fade" id="new-operation-modal" tabindex="-1" aria-labelledby="new-operation-modalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="new-operation-modalLabel">Nueva operación</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form>
+                      <div class="modal-body" [formGroup]="form">
+                        <label for="description">Descripción:</label>
+                        <input type="text" class="form-control" formControlName="description" id="description">
+                        <label for="amount">Monto:</label>
+                        <input type="number" class="form-control" formControlName="amount" id="amount">
+                        <label for="type">Tipo:</label>
+                        <select class="form-select" formControlName="type" id="type">
+                          <option value=""></option>
+                          <option value="PROFIT">Gasto</option>
+                          <option value="EXPENSE">Ganancia</option>
+                        </select>
+                        <label for="category">Categoría:</label>
+                        <select class="form-select" formControlName="categoryId" id="category">
+                          <option value=""></option>
+                          <ng-container *ngFor="let category of categories; let i = index">
+                            <option value="{{category.id}}">{{category.name}}</option>
+                          </ng-container>
+                        </select>
+                        <label for="date">Fecha:</label>
+                        <input type="date" class="form-control" formControlName="date" id="date">
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-success" (click)="saveOperation()" data-bs-dismiss="modal">Agregar</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <!-- Modal End -->
+            </div>
+          </div>
+          <div class="container-fluid table-responsive mt-3">
+            <table class="table table-borderless table-hover" id="operations-results">
+              <tbody>
+                <ng-container *ngFor="let operation of operations; let i = index">
+                  <tr>
+                    <td>{{operation.description}}</td>
+                    <td>{{operation.category.name}}</td>
+                    <td>{{operation.date}}</td>
+                    <td>{{operation.amount}}</td>
+                    <td>
+
+                      <!-- Button trigger modal -->
+                      <button class="btn btn-link link-success" data-bs-toggle="modal"
+                        [attr.data-bs-target]="'#edit-operation-modal-' + i">
+                        Editar
+                      </button>
+
+                      <!-- Modal Start -->
+                      <div class="modal fade" [id]="'edit-operation-modal-' + i" tabindex="-1"
+                        aria-labelledby="edit-operation-modalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h1 class="modal-title fs-5" id="edit-operation-modalLabel">Editar operación</h1>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                            </div>
+                            <form>
+                              <div class="modal-body" [formGroup]="form">
+                                <label for="description">Descripción:</label>
+                                <input type="text" class="form-control" formControlName="description" id="description">
+                                <label for="amount">Monto:</label>
+                                <input type="number" class="form-control" formControlName="amount" id="amount">
+                                <label for="type">Tipo:</label>
+                                <select class="form-select" formControlName="type" id="type">
+                                  <option value=""></option>
+                                  <option value="PROFIT">Gasto</option>
+                                  <option value="EXPENSE">Ganancia</option>
+                                </select>
+                                <label for="category">Categoría:</label>
+                                <select class="form-select" formControlName="categoryId" id="category">
+                                  <option value=""></option>
+                                  <ng-container *ngFor="let category of categories; let i = index">
+                                    <option value="{{category.id}}">{{category.name}}</option>
+                                  </ng-container>
+                                </select>
+                                <label for="date">Fecha:</label>
+                                <input type="date" class="form-control" formControlName="date" id="date">
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary"
+                                  data-bs-dismiss="modal">Cancelar</button>
+                                <button type="button" class="btn btn-success" data-bs-dismiss="modal"
+                                  (click)="editOperation(operation.id)">Guardar</button>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Modal End -->
+
+                      <button class="btn btn-link link-success"
+                        (click)="deleteOperation(operation.id)">Eliminar</button>
+                    </td>
+                  </tr>
+                </ng-container>
+
+              </tbody>
+            </table>
+          </div>
+          <div *ngIf="operations == null" id="operations-no-results">
+            <div class="text-center p-3">
+              <img class="img-fluid m-3" src="assets/img/wallet.svg" alt="wallet image">
+            </div>
+            <p class="h4 text-center">Sin resultados</p>
+            <p class="text-center">Cambia los filtros o agrega operaciones</p>
+          </div>
+        </div>
+        <!-- Operations box end -->
+      </div>
+    </div>
+    <!-- Right col end -->
+  </div>
+</div>
+<app-footer></app-footer>
