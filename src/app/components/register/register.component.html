@@ -7,7 +7,7 @@
         <input class="form-control" type="text" formControlName="email" placeholder="Ingresa un email" />
         <input class="form-control my-3" type="password" formControlName="password1" placeholder="Ingresa una contraseña" />
         <input class="form-control" type="password" formControlName="password2" placeholder="Repite la contraseña" />
-        <p *ngIf="invalidData" class="text-light text-center mb-3">Datos inválidos</p>
+        <p *ngIf="invalidData" class="text-success text-center mb-3">Datos inválidos</p>
         <button type="submit" class="btn btn-success mt-3">Registrarse</button>
         <p class="mt-3"><a class="text-success" href="/login">Or sign in</a></p>
       </form>

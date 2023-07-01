@@ -97,7 +97,7 @@
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-success" (click)="saveOperation()" data-bs-dismiss="modal">Agregar</button>
+                        <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="saveOperation()">Agregar</button>
                       </div>
                     </form>
                   </div>
@@ -176,7 +176,7 @@
               </tbody>
             </table>
           </div>
-          <div *ngIf="operations == null" id="operations-no-results">
+          <div *ngIf="operations.length === 0" id="operations-no-results">
             <div class="text-center p-3">
               <img class="img-fluid m-3" src="assets/img/wallet.svg" alt="wallet image">
             </div>

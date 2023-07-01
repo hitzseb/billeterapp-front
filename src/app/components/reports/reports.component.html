@@ -3,7 +3,7 @@
 <section id="seccion-reportes" class="container d-flex justify-content-center my-3">
   <div class="card shadow col-lg-8 px-3 pt-3">
     <h2>Reportes</h2>
-        <div *ngIf="report !== null" class="container-fluid my-3">
+        <div *ngIf="!isReportEmpty(report)" class="container-fluid my-3">
           <table class="table table-borderless table-hover" id="reportes-resumen">
 
             <thead>
@@ -104,11 +104,12 @@
           </table>
       </div>
 
-      <div *ngIf="report === null" class="text-center p-3" id="reportes-no-results">
+      <div *ngIf="isReportEmpty(report)" class="text-center p-3" id="reportes-no-results">
         <img class="img-fluid m-3" src="img/chart.svg" alt="">
         <p class="h4 text-center">Operaciones insuficientes</p>
         <p class="text-center">Prueba agregando más operaciones</p>
       </div>
+
   </div>
 </section>
 

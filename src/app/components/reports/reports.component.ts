@@ -34,4 +34,14 @@ export class ReportsComponent {
       this.monthsByExpense = res.monthsByExpense});
   }
 
+  isReportEmpty(report: Report): boolean {
+    return (
+      !report ||
+      (report.categoriesByExpense.length === 0 &&
+        report.categoriesByProfit.length === 0 &&
+        report.monthsByExpense.length === 0 &&
+        report.monthsByProfit.length === 0)
+    );
+  }
+
 }

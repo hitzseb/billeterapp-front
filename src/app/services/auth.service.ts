@@ -23,8 +23,8 @@ export class AuthService {
   public login(user: User): any {
     return this.httpClient.post(`${this.API_URL}/authenticate`, user).subscribe((res: any) => {
       window.localStorage.setItem("ACCESS_TOKEN", res.jwt),
-        window.localStorage.setItem("AUTH", "true"),
-        this.router.navigateByUrl('/balance')
+      window.localStorage.setItem("AUTH", "true"),
+      this.router.navigateByUrl('/balance')
     })
   }
 
