@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Operation} from "../interfaces/operation";
+import { URL } from '../constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OperationService {
 
-  API_URL: string = 'https://hitzseb-wallet-wizard.onrender.com/api/v1'
+  API_URL: string = URL + '/api/v1'
 
   constructor(private http: HttpClient) { }
 
@@ -24,14 +25,14 @@ export class OperationService {
       params = params.set('date', date);
     }
 
-    const token = localStorage.getItem('ACCESS_TOKEN');
+    const token = sessionStorage.getItem('ACCESS_TOKEN');
     const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
     return this.http.get<Operation[]>(this.API_URL + '/operation/all',
       { params, headers });
   }
 
   saveOperation(operation: any): Observable<any> {
-    const token = localStorage.getItem('ACCESS_TOKEN');
+    const token = sessionStorage.getItem('ACCESS_TOKEN');
     const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
     return this.http.post(`${this.API_URL}/operation/new`, operation,
       { headers });
@@ -43,7 +44,7 @@ export class OperationService {
                 type: string | null,
                 categoryId: number | null,
                 date: string | null): Observable<any> {
-    const token = localStorage.getItem('ACCESS_TOKEN');
+    const token = sessionStorage.getItem('ACCESS_TOKEN');
     const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
     let url = `http://localhost:8080/api/v1/operation/${id}/edit?`;
     if (description) {
@@ -66,7 +67,7 @@ export class OperationService {
   }
 
   deleteOperation(id:number):Observable<any> {
-    const token = localStorage.getItem('ACCESS_TOKEN');
+    const token = sessionStorage.getItem('ACCESS_TOKEN');
     const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
     return this.http.delete(`${this.API_URL}/operation/${id}/delete`,
       { headers });

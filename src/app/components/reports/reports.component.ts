@@ -13,18 +13,20 @@ export class ReportsComponent {
 
   constructor(private authService: AuthService, private router: Router, private reportService: ReportService) { }
 
-  report!: Report;
-  categoriesByProfit!: any[];
-  categoriesByExpense!: any[];
-  monthsByProfit!: any[];
-  monthsByExpense!: any[];
+  report: Report = {
+    categoriesByExpense: [],
+    categoriesByProfit: [],
+    monthsByExpense: [],
+    monthsByProfit: []
+  };
+  categoriesByProfit: any[] = [];
+  categoriesByExpense: any[] = [];
+  monthsByProfit: any[] = [];
+  monthsByExpense: any[] = [];
 
   ngOnInit() {
 
-    console.log(this.authService.isLoggedIn());
-    if (!this.authService.isLoggedIn()) {
-      this.router.navigate(['/login']);
-    }
+    this.authService.isLoggedIn();
 
     this.reportService.getReports().subscribe(res => {
       this.report = res;

@@ -23,9 +23,13 @@ export class BalanceComponent {
               private categoryService: CategoryService,
               private operationService: OperationService) { }
 
-  balance!: Balance;
-  categories!: Category[]
-  operations!: Operation[]
+  balance: Balance = {
+    profits: 0,
+    expenses: 0,
+    total: 0
+  }
+  categories: Category[] = []
+  operations: Operation[] = []
   type!: any;
   categoryId!: any;
   date!: any;
@@ -34,14 +38,11 @@ export class BalanceComponent {
 
   ngOnInit() {
 
-    console.log(this.authService.isLoggedIn());
-    if (!this.authService.isLoggedIn()) {
-      this.router.navigate(['/login']);
-    }
+    this.authService.isLoggedIn();
 
     this.getBalance();
 
-    this.categoryService.getAllCategories().subscribe(res => {this.categories = res, console.log(this.categories)});
+    this.categoryService.getAllCategories().subscribe(res => {this.categories = res});
 
     this.getOperations();
 
@@ -64,10 +65,6 @@ export class BalanceComponent {
     this.categoryId = (<HTMLInputElement>document.getElementById('category-filter')).value;
     this.date = (<HTMLInputElement>document.getElementById('date-filter')).value;
 
-    console.log(this.type);
-    console.log(this.categoryId);
-    console.log(this.date);
-
     this.operationService.getAllOperations(this.type, this.categoryId, this.date)
       .subscribe(res => {this.operations = res});
   }
@@ -80,9 +77,9 @@ export class BalanceComponent {
       categoryId: this.form.get('categoryId')?.value,
       date: this.form.get('date')?.value,
     };
-    console.log(operation);
+
     this.operationService.saveOperation(operation).subscribe(res => {
-      this.operations.push(res.operation), this.getBalance()});
+    this.operations.push(res.operation), this.getBalance()});
   }
 
   editOperation(id: number) {
@@ -93,13 +90,13 @@ export class BalanceComponent {
     const date: string | null = this.form.get('date')?.value;
     const index = this.operations.findIndex(op => op.id === id);
     this.operationService.editOperation(id, description, amount, type, categoryId, date)
-      .subscribe(res => {this.operations[index] = res.operation});
+      .subscribe(res => {this.operations[index] = res.operation, this.getBalance()});
   }
 
   deleteOperation(id: number) {
     const index = this.operations.findIndex(op => op.id === id);
     this.operationService.deleteOperation(id).subscribe(res => {
-      this.operations.splice(index, 1)});
+      this.operations.splice(index, 1), this.getBalance()});
   }
 
 }
