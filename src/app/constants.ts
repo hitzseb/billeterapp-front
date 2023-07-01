@@ -1,2 +1,2 @@
-// export const URL = "https://hitzseb-wallet-wizard.onrender.com";
-export const URL = "http://localhost:10000";
+export const URL = "https://hitzseb-wallet-wizard.onrender.com";
+// export const URL = "http://localhost:10000";
