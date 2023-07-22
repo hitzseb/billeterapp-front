@@ -136,9 +136,9 @@
                             <form>
                               <div class="modal-body" [formGroup]="form">
                                 <label for="description">Descripción:</label>
-                                <input type="text" class="form-control" formControlName="description" id="description">
+                                <input type="text" class="form-control" formControlName="description" id="description" [placeholder]="operation.description">
                                 <label for="amount">Monto:</label>
-                                <input type="number" class="form-control" formControlName="amount" id="amount">
+                                <input type="number" class="form-control" formControlName="amount" id="amount" [placeholder]="operation.amount">
                                 <label for="type">Tipo:</label>
                                 <select class="form-select" formControlName="type" id="type">
                                   <option value=""></option>

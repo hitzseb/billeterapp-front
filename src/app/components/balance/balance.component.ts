@@ -56,6 +56,10 @@ export class BalanceComponent {
 
   }
 
+  resetForm() {
+    this.form.reset();
+  }
+
   getBalance() {
     this.balanceService.getBalance().subscribe(res => {this.balance = res});
   }
@@ -79,7 +83,10 @@ export class BalanceComponent {
     };
 
     this.operationService.saveOperation(operation).subscribe(res => {
-    this.operations.push(res.operation), this.getBalance()});
+    this.operations.push(res.operation), 
+    this.getBalance(),
+    this.resetForm()
+  });
   }
 
   editOperation(id: number) {
