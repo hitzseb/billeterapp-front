@@ -1,7 +1,7 @@
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
-import {Observable} from "rxjs";
-import {Operation} from "../interfaces/operation";
+import { Observable } from 'rxjs';
+import { Operation } from '../interfaces/operation';
 import { URL } from '../constants';
 
 @Injectable({
@@ -41,7 +41,7 @@ export class OperationService {
   editOperation(id: number,
                 description: string | null,
                 amount: number | null,
-                type: string | null,
+                transaction: string | null,
                 categoryId: number | null,
                 date: string | null): Observable<any> {
     const token = sessionStorage.getItem('ACCESS_TOKEN');
@@ -53,8 +53,8 @@ export class OperationService {
     if (amount != null) {
       url += `amount=${amount}&`;
     }
-    if (type != null) {
-      url += `type=${type}&`;
+    if (transaction != null) {
+      url += `transaction=${transaction}&`;
     }
     if (categoryId != null) {
       url += `categoryId=${categoryId}&`;

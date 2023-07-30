@@ -1,6 +1,6 @@
-import {Category} from "./category";
+import { Category } from "./category";
 
 export interface CategoryAmount {
-  category: Category,
-  amount: number
+    category: Category;
+    amount: number;
 }

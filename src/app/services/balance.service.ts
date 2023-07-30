@@ -1,4 +1,4 @@
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Balance } from '../interfaces/balance';
@@ -7,7 +7,6 @@ import { URL } from '../constants';
 @Injectable({
   providedIn: 'root'
 })
-
 export class BalanceService {
 
   private API_URL: string = URL + '/api/v1'

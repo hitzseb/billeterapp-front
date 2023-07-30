@@ -22,12 +22,12 @@ export class AuthService {
 
 
   public register(user: User) {
-    return this.httpClient.post(`${this.API_URL}/registration`, user).subscribe(() => {this.router.navigateByUrl('/login')});
+    return this.httpClient.post(`${this.API_URL}/register`, user).subscribe(() => {this.router.navigateByUrl('/login')});
   }
 
   public login(user: User): any {
     return this.httpClient.post(`${this.API_URL}/authenticate`, user).subscribe((res: any) => {
-      window.sessionStorage.setItem("ACCESS_TOKEN", res.jwt),
+      window.sessionStorage.setItem("ACCESS_TOKEN", res.token),
       this.router.navigateByUrl('/balance')
     })
   }

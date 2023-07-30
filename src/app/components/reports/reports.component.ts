@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import {AuthService} from "../../services/auth.service";
+import {AuthService} from "../../services/authentication.service";
 import {Router} from "@angular/router";
-import {Report} from "../../interfaces/report";
-import {ReportService} from "../../services/report.service";
+import { Report } from 'src/app/interfaces/report';
+import {ReportService} from "../../services/reports.service";
 
 @Component({
   selector: 'app-reports',
@@ -47,3 +47,4 @@ export class ReportsComponent {
   }
 
 }
+
