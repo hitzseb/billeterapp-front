@@ -1,21 +1,23 @@
-<app-navbar></app-navbar>
+<nav class="navbar navbar-expand-lg navbar-light bg-success">
+  <div class="container-fluid">
+    <h1 class="text-light me-5 h3"><i class="fas fa-wallet mx-3"></i>Wallet Wizard</h1>
+  </div>
+</nav>
 
 <div class="container-fluid py-5" style="height: 100vh;">
-    <div class="row text-center my-5">
-        <div class="col-lg-2 col-sm-6 mx-auto">
-            <form class="mt-3 mb-3" [formGroup]="form" (ngSubmit)="onLogin()">
-                <input class="form-control mb-3" type="text" formControlName="email" placeholder="Email" />
-                <input class="form-control" type="password" formControlName="password" placeholder="Contraseña" />
-                <button type="submit" class="btn btn-success mt-3">Ingresar</button>
-                <p class="mt-3"><a class="text-success" href="/register">Registrarse</a></p>
-            </form>
-            <div class="alert alert-success" role="alert">
-                Antes que nada, asegúrese de que la <a
-                    href="https://hitzseb-billeterapp.onrender.com/swagger-ui/index.html" target="_blank">API</a> esté
-                despierta.
-            </div>
-        </div>
+  <div class="row text-center my-5">
+    <div class="col-lg-2 col-sm-6 mx-auto">
+      <form class="mt-3 mb-3" [formGroup]="form" (ngSubmit)="onLogin()">
+        <input class="form-control mb-3" type="text" formControlName="email" placeholder="Email" />
+        <input class="form-control" type="password" formControlName="password" placeholder="Contraseña" />
+        <button type="submit" class="btn btn-success mt-3">Ingresar</button>
+        <p class="mt-3"><a class="text-success" href="/register">Registrarse</a></p>
+      </form>
+      <div class="alert alert-success" role="alert">
+        Antes que nada, asegúrese de que la <a href="https://hitzseb-wallet-wizard.onrender.com/swagger-ui/index.html" target="_blank">API</a> esté despierta.
+      </div>
     </div>
+  </div>
 </div>
 
 <app-footer></app-footer>

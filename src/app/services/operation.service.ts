@@ -1,7 +1,7 @@
-import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Operation } from '../interfaces/operation';
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
+import {Observable} from "rxjs";
+import {Operation} from "../interfaces/operation";
 import { URL } from '../constants';
 
 @Injectable({

@@ -2,16 +2,17 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { FooterComponent } from './components/footer/footer.component';
 import { BalanceComponent } from './components/balance/balance.component';
-import { CategoriesComponent } from './components/categories/categories.component';
-import { ReportsComponent } from './components/reports/reports.component';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { FooterComponent } from './components/footer/footer.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
+import { FormsModule } from '@angular/forms';
+import { CategoriesComponent } from './components/categories/categories.component';
+import { ReportsComponent } from './components/reports/reports.component';
 
 @NgModule({
   declarations: [
@@ -19,10 +20,10 @@ import { LoginComponent } from './components/login/login.component';
     NavbarComponent,
     FooterComponent,
     BalanceComponent,
-    CategoriesComponent,
-    ReportsComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    CategoriesComponent,
+    ReportsComponent
   ],
   imports: [
     BrowserModule,

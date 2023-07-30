@@ -1,14 +1,14 @@
-import { Component } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { User } from 'src/app/interfaces/user';
-import { AuthService } from 'src/app/services/authentication.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
   form: FormGroup
   user: User = Object()
@@ -39,4 +39,3 @@ export class LoginComponent {
   }
 
 }
-

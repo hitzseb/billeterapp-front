@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
-import { Router } from '@angular/router';
-import { Category } from 'src/app/interfaces/category';
-import { AuthService } from 'src/app/services/authentication.service';
-import { CategoryService } from 'src/app/services/category.service';
+import { Router } from "@angular/router";
+import { Category } from "../../interfaces/category";
+import { AuthService } from "../../services/auth.service";
+import { CategoryService } from "../../services/category.service";
+import { FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms";
 
 @Component({
   selector: 'app-categories',
