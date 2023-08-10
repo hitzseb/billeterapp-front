@@ -7,7 +7,7 @@
           <table class="table table-borderless table-hover" id="reportes-resumen">
 
             <thead>
-            <tr>
+            <tr *ngIf="report.categoriesByProfit.length > 0">
               <span class="fw-bold lead">
                 Categorías por ganancia
               </span>
@@ -31,7 +31,7 @@
             </tbody>
 
             <thead>
-            <tr>
+            <tr *ngIf="report.categoriesByExpense.length > 0">
               <span class="fw-bold lead">
                 Categorías por gasto
               </span>
@@ -55,7 +55,7 @@
             </tbody>
 
             <thead>
-            <tr>
+            <tr *ngIf="report.monthsByProfit.length > 0">
               <span class="fw-bold lead">
                 Meses por ganancia
               </span>
@@ -79,7 +79,7 @@
             </tbody>
 
             <thead>
-            <tr>
+            <tr *ngIf="report.monthsByExpense.length > 0">
               <span class="fw-bold lead">
                 Meses por gasto
               </span>
